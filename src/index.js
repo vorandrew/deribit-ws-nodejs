@@ -139,6 +139,10 @@ export default class WS {
     }
 
     if (typeof res.success === 'boolean' && !res.success) {
+      if (this.opt.error) {
+        nextTick(() => this.opt.error(res.message))
+      }
+
       return error('onMessage: ', res.message)
     }
 
