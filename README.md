@@ -1,21 +1,22 @@
-# deribit-ws-js
-Deribit.com WebSocket browser generic library
+# deribit-ws-nodejs
+Deribit.com WebSocket NodeJS generic library
 
 # Install
 
 ```bash
-yarn add deribit-ws-js
+yarn add deribit-ws-nodejs
 ```
 
 Constructor
 
 ```js
-import Deribit from 'deribit-ws-js'
+import Deribit from 'deribit-ws-nodejs'
 const ws = new Deribit({
   key: 'deribit_key',
   secret: 'secret',
   testnet: false,
   message: msg => console.log(msg),
+  error: err => console.error(err),
 
   // see documentation for possible events
   trade: trade => console.log(msg),
@@ -39,16 +40,16 @@ ws.disconnect()
 ## Actions
 
 ```js
-    ws.action('positions').then(console.log)
+ws.action('positions').then(console.log)
 ```
 
 ```js
-  ws.action('buy', {
-    instrument: 'BTC-28DEC18-15000-C',
-    quantity: 1,
-    type: 'market',
-    label: '1123123',
-  }).then(console.log)
+ws.action('buy', {
+  instrument: 'BTC-28DEC18-15000-C',
+  quantity: 1,
+  type: 'market',
+  label: '1123123',
+}).then(console.log)
 ```
 
 ## Event hooks
