@@ -5,11 +5,9 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "rm -rf ./lib",
-    "build": "babel src -d lib",
+    "build": "babel src -d lib --minified",
     "lint": "eslint src",
-    "prepare": "yarn build",
-    "precommit": "yarn lint",
-    "prepush": "yarn test"
+    "prepare": "yarn build"
   },
   "eslintConfig": {
     "env": {
@@ -55,29 +53,24 @@
   },
   "babel": {
     "presets": [
-      "env"
-    ],
-    "plugins": [
-      "transform-object-rest-spread",
       [
-        "transform-runtime",
+        "@babel/preset-env",
         {
-          "polyfill": false,
-          "regenerator": true
+          "targets": {
+            "node": "current"
+          }
         }
       ]
     ]
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.2.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-runtime": "^6.26.0",
-    "eslint": "^4.19.1",
-    "husky": "^0.14.3"
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/register": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.10.0",
+    "husky": "^1.2.1"
   },
   "repository": {
     "type": "git",
@@ -86,7 +79,7 @@
   "author": "Andrey Vorobyov <vorandrew@gmail.com>",
   "private": false,
   "dependencies": {
-    "debug": "^3.1.0",
+    "debug": "^4.1.0",
     "nodejs-websocket": "^1.7.1"
   },
   "bugs": {
@@ -96,5 +89,10 @@
   "version": "1.0.0",
   "directories": {
     "lib": "lib"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
   }
 }
